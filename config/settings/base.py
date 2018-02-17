@@ -111,7 +111,14 @@ MANAGERS = ADMINS
 # Uses django-environ to accept uri format
 # See: https://django-environ.readthedocs.io/en/latest/#supported-types
 DATABASES = {
-    'default': env.db('DATABASE_URL', default='postgres:///ez_university'),
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'mydatabase',
+        'USER': 'mydatabaseuser',
+        'PASSWORD': 'mypassword',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
+    }
 }
 DATABASES['default']['ATOMIC_REQUESTS'] = True
 
