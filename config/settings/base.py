@@ -8,6 +8,26 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/dev/ref/settings/
 """
 import environ
+import os
+# Both of these imports are used to get secret data
+import json
+from django.core.exceptions import ImproperlyConfigured
+
+# JSON-based secrets module
+with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'secrets.json')) as f:
+    secrets = json.loads(f.read())
+
+'''This is a helper method to retrieve the passed setting from
+the private json file.'''
+
+
+def get_secret(setting, secrets=secrets):
+    try:
+        return secrets[setting]
+    except KeyError:
+        error_msg = 'Set the {0} variable in the secrets file'.format(setting)
+        raise ImproperlyConfigured(error_msg)
+
 
 ROOT_DIR = environ.Path(__file__) - 3  # (ez_university/config/settings/base.py - 3 = ez_university/)
 APPS_DIR = ROOT_DIR.path('ez_university')
@@ -113,11 +133,11 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'mydatabase',
-        'USER': 'mydatabaseuser',
-        'PASSWORD': 'mypassword',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
+        'NAME': get_secret('PRODUCTION_DATABASE_NAME'),
+        'USER': get_secret('PRODUCTION_DATABASE_USER'),
+        'PASSWORD': get_secret('PRODUCTION_DATABASE_PASSWORD'),
+        'HOST': get_secret('PRODUCTION_DATABASE_HOST'),
+        'PORT': get_secret('PRODUCTION_DATABASE_PORT'),
     }
 }
 DATABASES['default']['ATOMIC_REQUESTS'] = True

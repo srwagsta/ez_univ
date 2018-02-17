@@ -355,6 +355,11 @@ pyvenv.cfg
 pip-selfcheck.json
 
 
+# ignores the compiled static folder as this will be host on another server in production
+/static/*
+
+# ignores the secrets file
+/config/settings/secrets.json
 
 
 ez_university/media/
