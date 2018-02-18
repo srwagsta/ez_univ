@@ -24,7 +24,7 @@ SECRET_KEY = get_secret('THE_SECRET_KEY')
 # # properly on Heroku.
 # SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 #
-# # SECURITY CONFIGURATION
+# SECURITY CONFIGURATION
 # # ------------------------------------------------------------------------------
 # # See https://docs.djangoproject.com/en/dev/ref/middleware/#module-django.middleware.security
 # # and https://docs.djangoproject.com/en/dev/howto/deployment/checklist/#run-manage-py-check-deploy
