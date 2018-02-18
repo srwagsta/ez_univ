@@ -98,8 +98,8 @@ SECRET_KEY = get_secret('THE_SECRET_KEY')
 # # 'django.contrib.staticfiles'
 # AWS_PRELOAD_METADATA = True
 # INSTALLED_APPS = ['collectfast', ] + INSTALLED_APPS
-# # COMPRESSOR
-# # ------------------------------------------------------------------------------
+# COMPRESSOR
+# ------------------------------------------------------------------------------
 # COMPRESS_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 # COMPRESS_URL = STATIC_URL
 # COMPRESS_ENABLED = env.bool('COMPRESS_ENABLED', default=True)
