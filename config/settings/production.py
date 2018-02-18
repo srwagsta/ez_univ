@@ -58,7 +58,7 @@ def get_secret(setting, secrets=secrets):
 # # ------------------------------------------------------------------------------
 # # Hosts/domain names that are valid for this site
 # # See https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts
-# ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['example.com', ])
+ALLOWED_HOSTS = get_secret('DJANGO_ALLOWED_HOSTS')
 # # END SITE CONFIGURATION
 #
 # INSTALLED_APPS += ['gunicorn', ]
