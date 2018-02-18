@@ -12,6 +12,7 @@ Production settings for EZ_university project.
 
 from .base import *  # noqa
 # Both of these imports are used to get secret data
+import os
 import json
 from django.core.exceptions import ImproperlyConfigured
 
