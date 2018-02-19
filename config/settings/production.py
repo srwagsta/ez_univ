@@ -37,9 +37,6 @@ from .base import *  # noqa
 #
 
 
-DEBUG = False
-
-
 # SECURITY CONFIGURATION
 # # ------------------------------------------------------------------------------
 # # See https://docs.djangoproject.com/en/dev/ref/middleware/#module-django.middleware.security
