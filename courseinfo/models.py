@@ -5,17 +5,26 @@ class Semester(models.Model):
     semester_id = models.AutoField(primary_key=True)
     semester_name = models.CharField(max_length=45, unique=True)
 
+    def __str__(self):
+        return '%s' % self.semester_name
+
 
 class Course(models.Model):
     course_id = models.AutoField(primary_key=True)
-    course_number = models.CharField(max_langth=20, unique=True)
+    course_number = models.CharField(max_length=20, unique=True)
     course_name = models.CharField(max_length=255)
+
+    def __str__(self):
+        return '%s' % self.course_name
 
 
 class Instructor(models.Model):
     instructor_id = models.AutoField(primary_key=True)
     first_name = models.CharField(max_length=45)
     last_name = models.CharField(max_length=45)
+
+    def __str__(self):
+        return '%s , %s' % (self.last_name, self.first_name)
 
 
 class Student(models.Model):
@@ -24,12 +33,22 @@ class Student(models.Model):
     last_name = models.CharField(max_length=45)
     nick_name = models.CharField(max_length=45)
 
+    def __str__(self):
+        if self.nick_name == "":
+            return '%s , %s' % (self.last_name, self.first_name)
+        else:
+            return '%s , %s (%s)' % (self.last_name, self.first_name, self.nick_name)
+
 
 class Section(models.Model):
     section_id = models.AutoField(primary_key=True)
     section_name = models.CharField(max_length=10)
-    semester_id = models.ManyToManyField(Semester.semester_id)
-    course_id = models.ManyToManyField(Course.course_id)
+    semester = models.ForeignKey(Semester, related_name='sections', on_delete=models.CASCADE)
+    course = models.ForeignKey(Course, related_name='sections', on_delete=models.CASCADE)
+    instructors = models.ManyToManyField(Instructor, related_name='sections')
+    students = models.ManyToManyField(Student, related_name='sections')
 
+    def __str__(self):
+        return '%s - %s (%s)' % (self.course.course_number, self.section_name, self.semester.semester_name)
 
 

@@ -83,6 +83,8 @@ THIRD_PARTY_APPS = [
 LOCAL_APPS = [
     # custom users app
     'ez_university.users.apps.UsersConfig',
+    'ez_university.apps.MySiteConfig',
+    'courseinfo',
     # Your stuff: custom apps go here
 ]
 
