@@ -13,21 +13,21 @@ import os
 import json
 from django.core.exceptions import ImproperlyConfigured
 
-# JSON-based secrets module
-with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'secrets.json')) as f:
-    secrets = json.loads(f.read())
-
-'''This is a helper method to retrieve the passed setting from
-the private json file.'''
-
-
-def get_secret(setting, secrets=secrets):
-    try:
-        return secrets[setting]
-    except KeyError:
-        error_msg = 'Set the {0} variable in the secrets file'.format(setting)
-        raise ImproperlyConfigured(error_msg)
-
+# # JSON-based secrets module
+# with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'secrets.json')) as f:
+#     secrets = json.loads(f.read())
+#
+# '''This is a helper method to retrieve the passed setting from
+# the private json file.'''
+#
+#
+# def get_secret(setting, secrets=secrets):
+#     try:
+#         return secrets[setting]
+#     except KeyError:
+#         error_msg = 'Set the {0} variable in the secrets file'.format(setting)
+#         raise ImproperlyConfigured(error_msg)
+#
 
 ROOT_DIR = environ.Path(__file__) - 3  # (ez_university/config/settings/base.py - 3 = ez_university/)
 APPS_DIR = ROOT_DIR.path('ez_university')
@@ -109,10 +109,6 @@ MIGRATION_MODULES = {
     'sites': 'ez_university.contrib.sites.migrations'
 }
 
-# DEBUG
-# ------------------------------------------------------------------------------
-# See: https://docs.djangoproject.com/en/dev/ref/settings/#debug
-DEBUG = env.bool('DJANGO_DEBUG', False)
 
 # FIXTURE CONFIGURATION
 # ------------------------------------------------------------------------------

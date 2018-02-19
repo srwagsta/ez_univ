@@ -40,7 +40,7 @@ class Student(models.Model):
     student_id = models.AutoField(primary_key=True)
     first_name = models.CharField(max_length=45)
     last_name = models.CharField(max_length=45)
-    nick_name = models.CharField(max_length=45)
+    nick_name = models.CharField(max_length=45, default='')
 
     def __str__(self):
         if self.nick_name == "":

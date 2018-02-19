@@ -35,6 +35,11 @@ def get_secret(setting, secrets=secrets):
 # # properly on Heroku.
 # SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 #
+
+
+DEBUG = False
+
+
 # SECURITY CONFIGURATION
 # # ------------------------------------------------------------------------------
 # # See https://docs.djangoproject.com/en/dev/ref/middleware/#module-django.middleware.security
