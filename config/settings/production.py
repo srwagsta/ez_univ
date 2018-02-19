@@ -58,7 +58,7 @@ def get_secret(setting, secrets=secrets):
 # # ------------------------------------------------------------------------------
 # # Hosts/domain names that are valid for this site
 # # See https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = get_secret('DJANGO_ALLOWED_HOSTS')
+ALLOWED_HOSTS = [get_secret('DJANGO_ALLOWED_HOSTS')]
 # # END SITE CONFIGURATION
 #
 # INSTALLED_APPS += ['gunicorn', ]
@@ -112,8 +112,8 @@ ALLOWED_HOSTS = get_secret('DJANGO_ALLOWED_HOSTS')
 # COMPRESSOR
 # ------------------------------------------------------------------------------
 # COMPRESS_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-# COMPRESS_URL = STATIC_URL
-# COMPRESS_ENABLED = env.bool('COMPRESS_ENABLED', default=True)
+COMPRESS_URL = STATIC_URL
+COMPRESS_ENABLED = env.bool('COMPRESS_ENABLED', default=True)
 # # EMAIL
 # # ------------------------------------------------------------------------------
 # DEFAULT_FROM_EMAIL = env('DJANGO_DEFAULT_FROM_EMAIL',
