@@ -5,9 +5,7 @@ from .models import Instructor, Section, Course, Semester, Student
 
 def courseinfo_home_view(request):
     template = loader.get_template('courseinfo/courseinfo_base.html')
-    context = {}
-    output = template.render(context)
-    return HttpResponse(output)
+    return HttpResponse(template.render())
 
 
 def instructor_list_view(request):
