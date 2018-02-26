@@ -17,7 +17,7 @@ urlpatterns = [
     url(r'^accounts/', include('allauth.urls')),
 
     # Custom urls includes go here
-    url(r'^courseinfo/', include('courseinfo.urls')),  # We should change this to r'^courses/"
+    url(r'^courseinfo/', include('courseinfo.urls', namespace='courseinfo')),  # We should change this to r'^courses/"
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

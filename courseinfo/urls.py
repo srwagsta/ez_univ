@@ -8,7 +8,7 @@ from .views import (instructor_list_view,
 
 app_name = 'courseinfo'
 urlpatterns = [
-    url(regex=r'^courseinfo/',
+    url(regex=r'^',
         view=courseinfo_home_view,
         name='courseinfo_home'
         ),
