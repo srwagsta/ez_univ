@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block extended_nav_links %}
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'courseinfo:instructor_list' %}">Instructors</a>
+  </li>
+
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'courseinfo:section_list' %}">Sections</a>
+  </li>
+
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'courseinfo:course_list' %}">Courses</a>
+  </li>
+
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'courseinfo:semester_list' %}">Semesters</a>
+  </li>
+
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'courseinfo:student_list' %}">Students</a>
+  </li>
+{% endblock %}
+
+{% block content %}
+  <div><!-- start of container -->
+      <header>
+          <h1>EZ University</h1>
+          <h2>Course Information System</h2>
+      </header>
+
+      <main>
+          {% block extended_content %}
+            <br />
+            <strong>Welcome to the home course, please view more option in the navbar!</strong>
+            <br />
+            <br />
+          {% endblock %}
+      </main>
+  </div><!-- end of container -->
+
+  <footer>
+      <p>
+          <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
+              <img alt="Creative Commons License" style="border-width:0"
+                   src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png"/>
+          </a><br/><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">EZ University Tutorial Examples and Code</span>
+          by
+          <a xmlns:cc="http://creativecommons.org/ns#" href="https://www.ligent.net" property="cc:attributionName"
+             rel="cc:attributionURL">Ligent, LLC</a> are licensed under a
+          <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike
+              4.0 International License</a>.
+      </p>
+  </footer>
+{% endblock %}
