@@ -365,3 +365,5 @@ pip-selfcheck.json
 ez_university/media/
 
 
+# Ignoge the dev database
+/dev_db
