@@ -1,23 +1,23 @@
 {% extends 'courseinfo/courseinfo_base.html' %}
 
 {% block title %}
-  Instructor - {{ instructor }}
+  Section - {{ section }}
 {% endblock %}
 
 {% block extended_content %}
-  <h2> {{  instructor }} </h2>
+  <h2> {{  section }} </h2>
 
   <section>
-    <h3>First Name</h3>
-    <p>{{ instructor.first_name }}</p>
-    <h3>Last Name</h3>
-    <p>{{ instructor.last_name }}</p>
+    <h3>Course</h3>
+    <p>{{ section.course }}</p>
+    <h3>Section</h3>
+    <p>{{ section.section_name }}</p>
   </section>
 
   <section>
     <ul>
       <h3>Sections</h3>
-      {%  for section in section_list %}
+      {%  for section in object_list.section %}
         <li>
           <a href="{% url 'courseinfo:section_detail' section.pk %}">{{ section }}</a>
         </li>
