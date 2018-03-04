@@ -1,40 +1,25 @@
-from django.conf.urls import url
+from django.urls import path
 from .views import (InstructorList,
+                    InstructorDetailView,
                     SectionList,
                     CourseList,
                     SemesterList,
                     StudentList,
-                    courseinfo_home_view)
+                    Courseinfo)
 
 app_name = 'courseinfo'
 urlpatterns = [
-    url(regex=r'^information/',
-        view=courseinfo_home_view,
-        name='courseinfo_home'
-        ),
+    path('information/', Courseinfo.as_view(), name='courseinfo_home'),
 
-    url(regex=r'^instructor/',
-        view=InstructorList.as_view(),
-        name='instructor_list'
-        ),
+    path('instructor/', InstructorList.as_view(), name='instructor_list'),
 
-    url(regex=r'^section/',
-        view=SectionList.as_view(),
-        name='section_list'
-        ),
+    path('instructor/<pk>', InstructorDetailView.as_view(), name='instructor-detail'),
 
-    url(regex=r'^course/',
-        view=CourseList.as_view(),
-        name='course_list'
-        ),
+    path('section/', SectionList.as_view(), name='section_list'),
 
-    url(regex=r'^semester/',
-        view=SemesterList.as_view(),
-        name='semester_list'
-        ),
+    path('course/', CourseList.as_view(), name='course_list'),
 
-    url(regex=r'^student/',
-        view=StudentList.as_view(),
-        name='student_list'
-        ),
+    path('semester/', SemesterList.as_view(), name='semester_list'),
+
+    path('student/', StudentList.as_view(), name='student_list'),
 ]

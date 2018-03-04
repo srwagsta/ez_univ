@@ -1,17 +1,24 @@
-from django.http.response import HttpResponse
-from django.template import loader
-from django.views.generic import ListView
+from django.views.generic import ListView, TemplateView, DetailView
 from .models import Instructor, Section, Course, Semester, Student
 
 
-def courseinfo_home_view(request):
-    template = loader.get_template('courseinfo/courseinfo_base.html')
-    return HttpResponse(template.render())
+class Courseinfo(TemplateView):
+    template_name = 'courseinfo/courseinfo_base.html'
 
 
 class InstructorList(ListView):
     model = Instructor
     context_object_name = 'instructor_list'
+
+
+class InstructorDetailView(DetailView):
+    model = Instructor
+
+    def get_context_data(self, **kwargs):
+        context = super(InstructorDetailView, self).get_context_data(**kwargs)
+        context['section_list'] = Section.objects.all()
+        return context
+
 
 
 class SectionList(ListView):
