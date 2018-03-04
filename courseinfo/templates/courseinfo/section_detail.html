@@ -8,22 +8,43 @@
   <h2> {{  section }} </h2>
 
   <section>
-    <h3>Course</h3>
-    <p>{{ section.course }}</p>
-    <h3>Section</h3>
+    <br/>
+    <h3>Section Name</h3>
     <p>{{ section.section_name }}</p>
+    <br/>
+    <h3>Semester</h3>
+    <a  href="{% url 'courseinfo:semester_detail' section.semester.pk %}">{{ section.semester }}</a>
+    <p><br/></p>
+    <h3>Course</h3>
+    <a  href="{% url 'courseinfo:course_detail' section.course.pk %}">{{ section.course }}</a>
+    <p><br/></p>
+
   </section>
 
-  <section>
+ <section>
+
+    <h2> Instructor List </h2>
     <ul>
-      <h3>Sections</h3>
-      {%  for section in object_list.section %}
+      {%  for instructor in section.instructors.all %}
         <li>
-          <a href="{% url 'courseinfo:section_detail' section.pk %}">{{ section }}</a>
+          <a href="{% url 'courseinfo:instructor_detail' instructor.pk %}">{{ instructor }}</a>
         </li>
         {% empty %}
-          <li><em>{{  instructor }} is not currently teaching any sections. </em></li>
+          <li><em>There are currently no instructors available.</em></li>
+      {% endfor %}
+    </ul>
+
+    <br/>
+    <h2> Student List </h2>
+    <ul>
+      {%  for student in section.students.all %}
+        <li>
+          <a href="{% url 'courseinfo:student_detail' student.pk %}">{{ student }}</a>
+        </li>
+        {% empty %}
+          <li><em>There are currently no students available.</em></li>
       {% endfor %}
     </ul>
   </section>
+
 {% endblock %}

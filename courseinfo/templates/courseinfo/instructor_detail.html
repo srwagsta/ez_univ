@@ -15,15 +15,13 @@
   </section>
 
   <section>
-    <ul>
-      <h3>Sections</h3>
-      {%  for section in section_list %}
-        <li>
-          <a href="{% url 'courseinfo:section_detail' section.pk %}">{{ section }}</a>
-        </li>
-        {% empty %}
-          <li><em>{{  instructor }} is not currently teaching any sections. </em></li>
-      {% endfor %}
-    </ul>
+    <h3>Sections</h3>
+    {%  for section in instructor.sections.all %}
+      <li>
+        <a href="{% url 'courseinfo:section_detail' section.pk %}">{{ section }}</a>
+      </li>
+      {% empty %}
+        <li><em>{{  instructor }} is not currently teaching any sections. </em></li>
+    {% endfor %}
   </section>
 {% endblock %}

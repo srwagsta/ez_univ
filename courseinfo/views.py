@@ -15,9 +15,8 @@ class InstructorDetailView(DetailView):
     model = Instructor
 
     def get_context_data(self, **kwargs):
-        context = super(InstructorDetailView, self).get_context_data(**kwargs)
-        context['section_list'] = Section.objects.all()
-        return context
+        kwargs['sections'] = self.get_object().sections.all()
+        return super(InstructorDetailView, self).get_context_data(**kwargs)
 
 
 class SectionList(ListView):
@@ -27,7 +26,11 @@ class SectionList(ListView):
 
 class SectionDetailView(DetailView):
     model = Section
-    # I don't think I need to add any extra context, the default will do fine
+
+    def get_context_data(self, **kwargs):
+        kwargs['students'] = self.get_object().students.all()
+        kwargs['instructors'] = self.get_object().instructors.all()
+        return super(SectionDetailView, self).get_context_data(**kwargs)
 
 
 class CourseList(ListView):
@@ -37,7 +40,10 @@ class CourseList(ListView):
 
 class CourseDetailView(DetailView):
     model = Course
-    # The default context should be fine
+
+    def get_context_data(self, **kwargs):
+        kwargs['sections'] = self.get_object().sections.all()
+        return super(CourseDetailView, self).get_context_data(**kwargs)
 
 
 class SemesterList(ListView):
@@ -49,10 +55,8 @@ class SemesterDetailView(DetailView):
     model = Semester
 
     def get_context_data(self, **kwargs):
-        context = super(InstructorDetailView, self).get_context_data(**kwargs)
-        # context['section_list'] = Section.objects.all()
-        # We can add some more context here
-        return context
+        kwargs['sections'] = self.get_object().sections.all()
+        return super(SemesterDetailView, self).get_context_data(**kwargs)
 
 
 class StudentList(ListView):
@@ -64,7 +68,5 @@ class StudentDetailView(DetailView):
     model = Student
 
     def get_context_data(self, **kwargs):
-        context = super(InstructorDetailView, self).get_context_data(**kwargs)
-        # context['section_list'] = Section.objects.all()
-        # Add some context here
-        return context
+        kwargs['sections'] = self.get_object().sections.all()
+        return super(StudentDetailView, self).get_context_data(**kwargs)

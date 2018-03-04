@@ -9,7 +9,7 @@
   <ul>
     {%  for semester in semester_list %}
       <li>
-        <a href="">{{ semester }}</a>
+        <a href="{% url 'courseinfo:semester_detail' semester.pk %}">{{ semester }}</a>
       </li>
       {% empty %}
         <li><em>There are currently no semesters available.</em></li>

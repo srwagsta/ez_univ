@@ -1,0 +1,30 @@
+{% extends 'courseinfo/courseinfo_base.html' %}
+
+{% block title %}
+  Course - {{ course }}
+{% endblock %}
+
+{% block extended_content %}
+  <h2> {{  course }} </h2>
+
+  <section>
+    <br/>
+    <h3>Course Name and Number</h3>
+    <p>{{ course.course_number }} - {{ course.course_name }}</p>
+    <br/>
+  </section>
+
+  <section>
+    <h2> Section List </h2>
+    <ul>
+      {%  for section in course.sections.all %}
+        <li>
+          <a href="{% url 'courseinfo:section_detail' section.pk %}">{{ section }}</a>
+        </li>
+        {% empty %}
+          <li><em>There are currently no sections available.</em></li>
+      {% endfor %}
+    </ul>
+  </section>
+
+{% endblock %}
