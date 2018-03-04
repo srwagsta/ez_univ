@@ -1,5 +1,6 @@
 from django.http.response import HttpResponse
 from django.template import loader
+from django.views.generic import ListView
 from .models import Instructor, Section, Course, Semester, Student
 
 
@@ -8,41 +9,26 @@ def courseinfo_home_view(request):
     return HttpResponse(template.render())
 
 
-def instructor_list_view(request):
-    instructor_list = Instructor.objects.all()
-    template = loader.get_template('courseinfo/instructor_list.html')
-    context = {'instructor_list': instructor_list}
-    output = template.render(context)
-    return HttpResponse(output)
+class InstructorList(ListView):
+    model = Instructor
+    context_object_name = 'instructor_list'
 
 
-def section_list_view(request):
-    section_list = Section.objects.all()
-    template = loader.get_template('courseinfo/section_list.html')
-    context = {'section_list': section_list}
-    output = template.render(context)
-    return HttpResponse(output)
+class SectionList(ListView):
+    model = Section
+    context_object_name = 'section_list'
 
 
-def course_list_view(request):
-    course_list = Course.objects.all()
-    template = loader.get_template('courseinfo/course_list.html')
-    context = {'course_list': course_list}
-    output = template.render(context)
-    return HttpResponse(output)
+class CourseList(ListView):
+    model = Course
+    context_object_name = 'course_list'
 
 
-def semester_list_view(request):
-    semester_list = Semester.objects.all()
-    template = loader.get_template('courseinfo/semester_list.html')
-    context = {'semester_list': semester_list}
-    output = template.render(context)
-    return HttpResponse(output)
+class SemesterList(ListView):
+    model = Semester
+    context_object_name = 'semester_list'
 
 
-def student_list_view(request):
-    student_list = Student.objects.all()
-    template = loader.get_template('courseinfo/student_list.html')
-    context = {'student_list': student_list}
-    output = template.render(context)
-    return HttpResponse(output)
+class StudentList(ListView):
+    model = Student
+    context_object_name = 'student_list'

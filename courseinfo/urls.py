@@ -1,9 +1,9 @@
 from django.conf.urls import url
-from .views import (instructor_list_view,
-                    section_list_view,
-                    course_list_view,
-                    semester_list_view,
-                    student_list_view,
+from .views import (InstructorList,
+                    SectionList,
+                    CourseList,
+                    SemesterList,
+                    StudentList,
                     courseinfo_home_view)
 
 app_name = 'courseinfo'
@@ -14,27 +14,27 @@ urlpatterns = [
         ),
 
     url(regex=r'^instructor/',
-        view=instructor_list_view,
+        view=InstructorList.as_view(),
         name='instructor_list'
         ),
 
     url(regex=r'^section/',
-        view=section_list_view,
+        view=SectionList.as_view(),
         name='section_list'
         ),
 
     url(regex=r'^course/',
-        view=course_list_view,
+        view=CourseList.as_view(),
         name='course_list'
         ),
 
     url(regex=r'^semester/',
-        view=semester_list_view,
+        view=SemesterList.as_view(),
         name='semester_list'
         ),
 
     url(regex=r'^student/',
-        view=student_list_view,
+        view=StudentList.as_view(),
         name='student_list'
         ),
 ]
