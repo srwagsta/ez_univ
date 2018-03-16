@@ -19,7 +19,7 @@
     <ul>
       {%  for section in course.sections.all %}
         <li>
-          <a href="{% url 'courseinfo:section_detail' section.pk %}">{{ section }}</a>
+          <a href="{{ section.get_absolute_url }}">{{ section }}</a>
         </li>
         {% empty %}
           <li><em>There are currently no sections available.</em></li>

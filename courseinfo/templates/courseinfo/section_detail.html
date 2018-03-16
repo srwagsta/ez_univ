@@ -13,10 +13,10 @@
     <p>{{ section.section_name }}</p>
     <br/>
     <h3>Semester</h3>
-    <a  href="{% url 'courseinfo:semester_detail' section.semester.pk %}">{{ section.semester }}</a>
+    <a  href="{{ section.semester.get_absolute_url }}">{{ section.semester }}</a>
     <p><br/></p>
     <h3>Course</h3>
-    <a  href="{% url 'courseinfo:course_detail' section.course.pk %}">{{ section.course }}</a>
+    <a  href="{{ section.course.get_absolute_url }}">{{ section.course }}</a>
     <p><br/></p>
 
   </section>
@@ -27,7 +27,7 @@
     <ul>
       {%  for instructor in section.instructors.all %}
         <li>
-          <a href="{% url 'courseinfo:instructor_detail' instructor.pk %}">{{ instructor }}</a>
+          <a href="{{ instructor.get_absolute_url }}">{{ instructor }}</a>
         </li>
         {% empty %}
           <li><em>There are currently no instructors available.</em></li>
@@ -39,7 +39,7 @@
     <ul>
       {%  for student in section.students.all %}
         <li>
-          <a href="{% url 'courseinfo:student_detail' student.pk %}">{{ student }}</a>
+          <a href="{{ student.get_absolute_url }}">{{ student }}</a>
         </li>
         {% empty %}
           <li><em>There are currently no students available.</em></li>
