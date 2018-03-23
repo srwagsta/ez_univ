@@ -1,10 +1,10 @@
 {% extends 'courseinfo/courseinfo_base.html' %}
+{% load crispy_forms_tags %}
 
 {% block title %}
-  Create Instructor
+  {{ page_title|title }}
 {% endblock %}
 
 {% block extended_content %}
-  {% load crispy_forms_tags %}
   {% crispy form %}
 {% endblock %}
