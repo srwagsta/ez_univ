@@ -1,4 +1,9 @@
-from django.views.generic import ListView, TemplateView, DetailView
+from django.views.generic import (ListView,
+                                  TemplateView,
+                                  DetailView,
+                                  CreateView,
+                                  UpdateView,
+                                  DeleteView)
 from .models import Instructor, Section, Course, Semester, Student
 
 
@@ -17,6 +22,18 @@ class InstructorDetailView(DetailView):
     def get_context_data(self, **kwargs):
         kwargs['sections'] = self.get_object().sections.all()
         return super(InstructorDetailView, self).get_context_data(**kwargs)
+
+
+class InstructorCreate(CreateView):
+    model = Instructor
+    context_object_name = 'instructor_create'
+    fields = ['first_name', 'last_name']
+
+
+class InstructorUpdate(UpdateView):
+    model = Instructor
+    context_object_name = 'instructor_update'
+    fields = ['first_name', 'last_name']
 
 
 class SectionList(ListView):

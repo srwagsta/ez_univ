@@ -7,6 +7,12 @@
 {% block extended_content %}
   <h2> {{  instructor }} </h2>
 
+  <div>
+    <a href="{% url 'courseinfo:instructor_update' instructor.slug %}">
+      Update Instructor
+    </a>
+  </div>
+
   <section>
     <h3>First Name</h3>
     <p>{{ instructor.first_name }}</p>
