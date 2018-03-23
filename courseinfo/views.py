@@ -10,6 +10,7 @@ from .utils import CourseActionMixin
 GENERIC_CRISPY_FORM_PATH = 'courseinfo/generic_crispy_form.html'
 GENERIC_DELETE_TEMPLATE_PATH = 'courseinfo/generic_confirm_delete.html'
 
+
 class Courseinfo(TemplateView):
     template_name = 'courseinfo/courseinfo_base.html'
 
