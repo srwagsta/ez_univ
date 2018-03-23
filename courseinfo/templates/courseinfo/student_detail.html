@@ -7,6 +7,15 @@
 {% block extended_content %}
   <h2> {{ student.last_name }}, {{ student.first_name }} </h2>
 
+    <div>
+    <a class="btn btn-secondary" href="{% url 'courseinfo:student_update' student.slug %}">
+      Update Student
+    </a>
+    <a class="btn btn-danger" href="{% url 'courseinfo:student_remove' student.slug %}">
+      Remove Student
+    </a>
+  </div>
+
   <section>
     <br/>
     <h3>Student Name</h3>

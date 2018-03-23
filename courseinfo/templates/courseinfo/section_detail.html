@@ -7,6 +7,15 @@
 {% block extended_content %}
   <h2> {{  section }} </h2>
 
+  <div>
+    <a class="btn btn-secondary" href="{% url 'courseinfo:section_update' section.slug %}">
+      Update Section
+    </a>
+    <a class="btn btn-danger" href="{% url 'courseinfo:section_remove' section.slug %}">
+      Remove Section
+    </a>
+  </div>
+
   <section>
     <br/>
     <h3>Section Name</h3>

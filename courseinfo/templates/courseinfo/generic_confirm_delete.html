@@ -1,12 +1,15 @@
 {% extends 'courseinfo/courseinfo_base.html' %}
 
 {% block title %}
-  Remove Instructor
+  {{ page_title|title }}
 {% endblock %}
 
 {% block extended_content %}
   <form action="" method="post">{% csrf_token %}
     <p>Are you sure you want to delete "{{ object }}"?</p>
-    <input type="submit" value="Confirm" />
-</form>
+    <input type="submit"
+           class="btn btn-danger"
+           value="Confirm" />
+  </form>
+  <br/>
 {% endblock %}

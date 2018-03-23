@@ -8,8 +8,11 @@
   <h2> {{  instructor }} </h2>
 
   <div>
-    <a href="{% url 'courseinfo:instructor_update' instructor.slug %}">
+    <a class="btn btn-secondary" href="{% url 'courseinfo:instructor_update' instructor.slug %}">
       Update Instructor
+    </a>
+    <a class="btn btn-danger" href="{% url 'courseinfo:instructor_remove' instructor.slug %}">
+      Remove Instructor
     </a>
   </div>
 

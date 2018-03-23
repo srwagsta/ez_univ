@@ -6,6 +6,13 @@
 
 {% block extended_content %}
   <h2> Student List </h2>
+  <div>
+    <a class="btn btn-primary"
+       href="{% url 'courseinfo:student_create' %}">
+      Create New Student
+    </a>
+  </div>
+  <br/>
   <ul>
     {%  for student in student_list %}
       <li>

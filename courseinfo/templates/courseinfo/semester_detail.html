@@ -7,6 +7,15 @@
 {% block extended_content %}
   <h2> {{  semester }} </h2>
 
+  <div>
+    <a class="btn btn-secondary" href="{% url 'courseinfo:semester_update' semester.slug %}">
+      Update Semester
+    </a>
+    <a class="btn btn-danger" href="{% url 'courseinfo:semester_remove' semester.slug %}">
+      Remove Semester
+    </a>
+  </div>
+
   <section>
     <br/>
     <h3>Semester Name</h3>

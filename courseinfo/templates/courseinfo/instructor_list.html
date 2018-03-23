@@ -7,10 +7,12 @@
 {% block extended_content %}
   <h2> Instructor List </h2>
   <div>
-    <a href="{% url 'courseinfo:instructor_create' %}">
+    <a class="btn btn-primary"
+       href="{% url 'courseinfo:instructor_create' %}">
       Create New Instructor
     </a>
   </div>
+  <br/>
   <ul>
     {%  for instructor in instructor_list %}
       <li>

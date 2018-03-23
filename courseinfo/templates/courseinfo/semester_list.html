@@ -6,6 +6,13 @@
 
 {% block extended_content %}
   <h2> Semester List </h2>
+  <div>
+    <a class="btn btn-primary"
+       href="{% url 'courseinfo:semester_create' %}">
+      Create New Semester
+    </a>
+  </div>
+  <br/>
   <ul>
     {%  for semester in semester_list %}
       <li>
