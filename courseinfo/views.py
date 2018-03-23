@@ -4,8 +4,9 @@ from django.views.generic import (ListView,
                                   CreateView,
                                   UpdateView,
                                   DeleteView)
+from django.urls import reverse_lazy
 from .models import Instructor, Section, Course, Semester, Student
-from .forms import InstructorForm
+from .forms import InstructorForm, SectionForm
 from .utils import CourseActionMixin
 
 
@@ -40,6 +41,11 @@ class InstructorUpdate(CourseActionMixin, UpdateView):
     template_name_suffix = '_update'
 
 
+class InstructorDelete(DeleteView):
+    model = Instructor
+    success_url = reverse_lazy('courseinfo:instructor_list')
+
+
 class SectionList(ListView):
     model = Section
     context_object_name = 'section_list'
@@ -52,6 +58,13 @@ class SectionDetailView(DetailView):
         kwargs['students'] = self.get_object().students.all()
         kwargs['instructors'] = self.get_object().instructors.all()
         return super(SectionDetailView, self).get_context_data(**kwargs)
+
+
+class SectionCreate(CourseActionMixin, CreateView):
+    model = Section
+    success_msg = "Section Created!"
+    form_class = SectionForm
+    template_name_suffix = '_create'
 
 
 class CourseList(ListView):

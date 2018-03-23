@@ -3,8 +3,10 @@ from .views import (InstructorList,
                     InstructorDetailView,
                     InstructorCreate,
                     InstructorUpdate,
+                    InstructorDelete,
                     SectionList,
                     SectionDetailView,
+                    SectionCreate,
                     CourseList,
                     CourseDetailView,
                     SemesterList,
@@ -21,11 +23,15 @@ urlpatterns = [
 
     path('instructor/create/', InstructorCreate.as_view(), name='instructor_create'),
 
+    path('instructor/<slug>/remove/', InstructorDelete.as_view(), name='instructor_remove'),
+
     path('instructor/<slug>/update/', InstructorUpdate.as_view(), name='instructor_update'),
 
     path('instructor/<slug>/', InstructorDetailView.as_view(), name='instructor_detail'),
 
     path('section/', SectionList.as_view(), name='section_list'),
+
+    path('section/create/', SectionCreate.as_view(), name='section_create'),
 
     path('section/<slug>/', SectionDetailView.as_view(), name='section_detail'),
 
