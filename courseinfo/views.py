@@ -5,6 +5,8 @@ from django.views.generic import (ListView,
                                   UpdateView,
                                   DeleteView)
 from .models import Instructor, Section, Course, Semester, Student
+from .forms import InstructorForm
+from .utils import CourseActionMixin
 
 
 class Courseinfo(TemplateView):
@@ -23,17 +25,19 @@ class InstructorDetailView(DetailView):
         kwargs['sections'] = self.get_object().sections.all()
         return super(InstructorDetailView, self).get_context_data(**kwargs)
 
-
-class InstructorCreate(CreateView):
+#TODO add the loginRequiredMixin to the CRUD views
+class InstructorCreate(CourseActionMixin, CreateView):
     model = Instructor
-    context_object_name = 'instructor_create'
-    fields = ['first_name', 'last_name']
+    success_msg = "Instructor Created!"
+    form_class = InstructorForm
+    template_name_suffix = '_create'
 
 
-class InstructorUpdate(UpdateView):
+class InstructorUpdate(CourseActionMixin, UpdateView):
     model = Instructor
-    context_object_name = 'instructor_update'
-    fields = ['first_name', 'last_name']
+    success_msg = "Instructor Updated!"
+    form_class = InstructorForm
+    template_name_suffix = '_update'
 
 
 class SectionList(ListView):

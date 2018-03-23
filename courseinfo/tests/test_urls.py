@@ -37,6 +37,20 @@ class TestInstructorURLs(TestCase):
         self.assertEquals(resolve('/courseinfo/instructor/instructor-slug/').view_name,
                           'courseinfo:instructor_detail')
 
+    def test_instructor_update_reverse(self):
+        """courseinfo:instructor_update should reverse to /courseinfo/instructor-slug/update/."""
+        self.assertEqual(reverse('courseinfo:instructor_update', kwargs={'slug': 'instructor-slug'}),
+                         '/courseinfo/instructor/instructor-slug/update/')
+
+    def test_instructor_update_resolve(self):
+        """/courseinfo/instructor-slug/update/ should resolve to courseinfo:instructor_update."""
+        self.assertEqual(
+            resolve('/courseinfo/instructor/instructor-slug/update/').view_name,
+            'courseinfo:instructor_update'
+        )
+
+    def test_instructor_create_reverse(self):
+        print("FINISH THIS TEST (test_instructor_create_reverse)")
 
 class TestSectionURLs(TestCase):
     """ Test URL resolves for CurseInfo app section pages"""

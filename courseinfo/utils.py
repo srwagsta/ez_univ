@@ -1,4 +1,5 @@
 from django.shortcuts import redirect, render
+from django.contrib import messages
 
 
 class ObjectCreateMixin:
@@ -21,3 +22,13 @@ class ObjectCreateMixin:
                 request,
                 self.template_name,
                 {'form': bound_form})
+
+
+class CourseActionMixin:
+    @property
+    def success_msg(self):
+        return NotImplemented
+
+    def form_valid(self, form):
+        messages.info(self.request, self.success_msg)
+        return super(CourseActionMixin, self).form_valid(form)

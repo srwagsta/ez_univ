@@ -1,0 +1,15 @@
+{% extends 'courseinfo/courseinfo_base.html' %}
+
+{% block title %}
+  Update Instructor
+{% endblock %}
+
+{% block extended_content %}
+  <form
+   action="{% url 'courseinfo:instructor_update' instructor.slug %}"
+   method="post">
+     {% csrf_token %}
+     {{ form.as_p }}
+     <button type="submit">Update Instructor</button>
+  </form>
+{% endblock %}
