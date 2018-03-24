@@ -133,22 +133,22 @@ ADMINS = [
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#managers
 MANAGERS = ADMINS
 
-# DATABASE CONFIGURATION
-# ------------------------------------------------------------------------------
-# See: https://docs.djangoproject.com/en/dev/ref/settings/#databases
-# Uses django-environ to accept uri format
-# See: https://django-environ.readthedocs.io/en/latest/#supported-types
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': get_secret('PRODUCTION_DATABASE_NAME'),
-        'USER': get_secret('PRODUCTION_DATABASE_USER'),
-        'PASSWORD': get_secret('PRODUCTION_DATABASE_PASSWORD'),
-        'HOST': get_secret('PRODUCTION_DATABASE_HOST'),
-        'PORT': get_secret('PRODUCTION_DATABASE_PORT'),
-    }
-}
-DATABASES['default']['ATOMIC_REQUESTS'] = True
+# # DATABASE CONFIGURATION
+# # ------------------------------------------------------------------------------
+# # See: https://docs.djangoproject.com/en/dev/ref/settings/#databases
+# # Uses django-environ to accept uri format
+# # See: https://django-environ.readthedocs.io/en/latest/#supported-types
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': get_secret('PRODUCTION_DATABASE_NAME'),
+#         'USER': get_secret('PRODUCTION_DATABASE_USER'),
+#         'PASSWORD': get_secret('PRODUCTION_DATABASE_PASSWORD'),
+#         'HOST': get_secret('PRODUCTION_DATABASE_HOST'),
+#         'PORT': get_secret('PRODUCTION_DATABASE_PORT'),
+#     }
+# }
+# DATABASES['default']['ATOMIC_REQUESTS'] = True
 
 
 # GENERAL CONFIGURATION
