@@ -141,7 +141,7 @@ COMPRESS_ENABLED = env.bool('COMPRESS_ENABLED', default=True)
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'dev_db',
+        'NAME': get_secret('PRODUCTION_DATABASE_NAME'),
     }
 }
 # LOGGING CONFIGURATION
