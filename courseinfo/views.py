@@ -1,7 +1,6 @@
 from django.views.generic import (ListView, TemplateView, DetailView,
                                   CreateView, UpdateView, DeleteView)
 from django.urls import reverse_lazy
-from braces.views import LoginRequiredMixin
 from .models import Instructor, Section, Course, Semester, Student
 from .forms import (InstructorForm, SectionForm, CourseForm,
                     SemesterForm, StudentForm)
@@ -29,7 +28,7 @@ class InstructorDetailView(DetailView):
         return super(InstructorDetailView, self).get_context_data(**kwargs)
 
 
-class InstructorCreate(LoginRequiredMixin, CourseActionMixin, CreateView):
+class InstructorCreate(CourseActionMixin, CreateView):
     model = Instructor
     success_msg = "Instructor Created!"
     form_class = InstructorForm
@@ -41,7 +40,7 @@ class InstructorCreate(LoginRequiredMixin, CourseActionMixin, CreateView):
         return context
 
 
-class InstructorUpdate(LoginRequiredMixin, CourseActionMixin, UpdateView):
+class InstructorUpdate(CourseActionMixin, UpdateView):
     model = Instructor
     success_msg = "Instructor Updated!"
     form_class = InstructorForm
@@ -53,7 +52,7 @@ class InstructorUpdate(LoginRequiredMixin, CourseActionMixin, UpdateView):
         return context
 
 
-class InstructorDelete(LoginRequiredMixin, ValidateUnconnectedSectionsDeleteMixin, DeleteView):
+class InstructorDelete(ValidateUnconnectedSectionsDeleteMixin, DeleteView):
     model = Instructor
     success_url = reverse_lazy('courseinfo:instructor_list')
     template_name = GENERIC_DELETE_TEMPLATE_PATH
@@ -74,7 +73,7 @@ class SectionDetailView(DetailView):
         return super(SectionDetailView, self).get_context_data(**kwargs)
 
 
-class SectionCreate(LoginRequiredMixin, CourseActionMixin, CreateView):
+class SectionCreate(CourseActionMixin, CreateView):
     model = Section
     success_msg = "Section Created!"
     form_class = SectionForm
@@ -86,7 +85,7 @@ class SectionCreate(LoginRequiredMixin, CourseActionMixin, CreateView):
         return context
 
 
-class SectionUpdate(LoginRequiredMixin, CourseActionMixin, UpdateView):
+class SectionUpdate(CourseActionMixin, UpdateView):
     model = Section
     success_msg = "Section Updated!"
     form_class = SectionForm
@@ -98,7 +97,7 @@ class SectionUpdate(LoginRequiredMixin, CourseActionMixin, UpdateView):
         return context
 
 
-class SectionDelete(LoginRequiredMixin, DeleteView):
+class SectionDelete(DeleteView):
     model = Section
     success_url = reverse_lazy('courseinfo:section_list')
     template_name = GENERIC_DELETE_TEMPLATE_PATH
@@ -122,7 +121,7 @@ class CourseDetailView(DetailView):
         return super(CourseDetailView, self).get_context_data(**kwargs)
 
 
-class CourseCreate(LoginRequiredMixin, CourseActionMixin, CreateView):
+class CourseCreate(CourseActionMixin, CreateView):
     model = Course
     success_msg = "Course Created!"
     form_class = CourseForm
@@ -134,7 +133,7 @@ class CourseCreate(LoginRequiredMixin, CourseActionMixin, CreateView):
         return context
 
 
-class CourseUpdate(LoginRequiredMixin, CourseActionMixin, UpdateView):
+class CourseUpdate(CourseActionMixin, UpdateView):
     model = Course
     success_msg = "Course Updated!"
     form_class = CourseForm
@@ -146,7 +145,7 @@ class CourseUpdate(LoginRequiredMixin, CourseActionMixin, UpdateView):
         return context
 
 
-class CourseDelete(LoginRequiredMixin, ValidateUnconnectedSectionsDeleteMixin, DeleteView):
+class CourseDelete(ValidateUnconnectedSectionsDeleteMixin, DeleteView):
     model = Course
     success_url = reverse_lazy('courseinfo:course_list')
     template_name = GENERIC_DELETE_TEMPLATE_PATH
@@ -166,7 +165,7 @@ class SemesterDetailView(DetailView):
         return super(SemesterDetailView, self).get_context_data(**kwargs)
 
 
-class SemesterCreate(LoginRequiredMixin, CourseActionMixin, CreateView):
+class SemesterCreate(CourseActionMixin, CreateView):
     model = Semester
     success_msg = "Semester Created!"
     form_class = SemesterForm
@@ -178,7 +177,7 @@ class SemesterCreate(LoginRequiredMixin, CourseActionMixin, CreateView):
         return context
 
 
-class SemesterUpdate(LoginRequiredMixin, CourseActionMixin, UpdateView):
+class SemesterUpdate(CourseActionMixin, UpdateView):
     model = Semester
     success_msg = "Semester Updated!"
     form_class = SemesterForm
@@ -190,7 +189,7 @@ class SemesterUpdate(LoginRequiredMixin, CourseActionMixin, UpdateView):
         return context
 
 
-class SemesterDelete(LoginRequiredMixin, ValidateUnconnectedSectionsDeleteMixin, DeleteView):
+class SemesterDelete(ValidateUnconnectedSectionsDeleteMixin, DeleteView):
     model = Semester
     success_url = reverse_lazy('courseinfo:semester_list')
     template_name = GENERIC_DELETE_TEMPLATE_PATH
@@ -210,7 +209,7 @@ class StudentDetailView(DetailView):
         return super(StudentDetailView, self).get_context_data(**kwargs)
 
 
-class StudentCreate(LoginRequiredMixin, CourseActionMixin, CreateView):
+class StudentCreate(CourseActionMixin, CreateView):
     model = Student
     success_msg = "Student Created!"
     form_class = StudentForm
@@ -222,7 +221,7 @@ class StudentCreate(LoginRequiredMixin, CourseActionMixin, CreateView):
         return context
 
 
-class StudentUpdate(LoginRequiredMixin, CourseActionMixin, UpdateView):
+class StudentUpdate(CourseActionMixin, UpdateView):
     model = Student
     success_msg = "Student Updated!"
     form_class = StudentForm
@@ -234,7 +233,7 @@ class StudentUpdate(LoginRequiredMixin, CourseActionMixin, UpdateView):
         return context
 
 
-class StudentDelete(LoginRequiredMixin, ValidateUnconnectedSectionsDeleteMixin, DeleteView):
+class StudentDelete(ValidateUnconnectedSectionsDeleteMixin, DeleteView):
     model = Student
     success_url = reverse_lazy('courseinfo:student_list')
     template_name = GENERIC_DELETE_TEMPLATE_PATH
