@@ -127,18 +127,23 @@ COMPRESS_ENABLED = env.bool('COMPRESS_ENABLED', default=True)
 # ]
 
 # DATABASE CONFIGURATION
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': get_secret('PRODUCTION_DATABASE_NAME'),
+#         'USER': get_secret('PRODUCTION_DATABASE_USER'),
+#         'PASSWORD': get_secret('PRODUCTION_DATABASE_PASSWORD'),
+#         'HOST': get_secret('PRODUCTION_DATABASE_HOST'),
+#         'PORT': get_secret('PRODUCTION_DATABASE_PORT'),
+#     }
+# }
+# DATABASES['default']['ATOMIC_REQUESTS'] = True
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': get_secret('PRODUCTION_DATABASE_NAME'),
-        'USER': get_secret('PRODUCTION_DATABASE_USER'),
-        'PASSWORD': get_secret('PRODUCTION_DATABASE_PASSWORD'),
-        'HOST': get_secret('PRODUCTION_DATABASE_HOST'),
-        'PORT': get_secret('PRODUCTION_DATABASE_PORT'),
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'dev_db',
     }
 }
-DATABASES['default']['ATOMIC_REQUESTS'] = True
-
 # LOGGING CONFIGURATION
 # ------------------------------------------------------------------------------
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#logging
