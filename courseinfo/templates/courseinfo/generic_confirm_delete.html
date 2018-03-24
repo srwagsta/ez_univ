@@ -7,6 +7,10 @@
 {% block extended_content %}
   <form action="" method="post">{% csrf_token %}
     <p>Are you sure you want to delete "{{ object }}"?</p>
+    <a href="{{ object.get_absolute_url }}"
+       class="btn btn-success">
+      Cancel
+    </a>
     <input type="submit"
            class="btn btn-danger"
            value="Confirm" />

@@ -8,10 +8,10 @@
   <h2> {{  section }} </h2>
 
   <div>
-    <a class="btn btn-secondary" href="{% url 'courseinfo:section_update' section.slug %}">
+    <a class="btn btn-secondary" href="{{ section.get_update_url }}">
       Update Section
     </a>
-    <a class="btn btn-danger" href="{% url 'courseinfo:section_remove' section.slug %}">
+    <a class="btn btn-danger" href="{{ section.get_delete_url }}">
       Remove Section
     </a>
   </div>

@@ -5,10 +5,11 @@ from braces.views import LoginRequiredMixin
 from .models import Instructor, Section, Course, Semester, Student
 from .forms import (InstructorForm, SectionForm, CourseForm,
                     SemesterForm, StudentForm)
-from .utils import CourseActionMixin
+from .utils import CourseActionMixin, ValidateUnconnectedSectionsDeleteMixin
 
 GENERIC_CRISPY_FORM_PATH = 'courseinfo/generic_crispy_form.html'
 GENERIC_DELETE_TEMPLATE_PATH = 'courseinfo/generic_confirm_delete.html'
+GENERIC_FAILED_DELETE_TEMPLATE_PATH = 'courseinfo/generic_failed_delete.html'
 
 
 class Courseinfo(TemplateView):
@@ -52,15 +53,11 @@ class InstructorUpdate(LoginRequiredMixin, CourseActionMixin, UpdateView):
         return context
 
 
-class InstructorDelete(LoginRequiredMixin, DeleteView):
+class InstructorDelete(LoginRequiredMixin, ValidateUnconnectedSectionsDeleteMixin, DeleteView):
     model = Instructor
     success_url = reverse_lazy('courseinfo:instructor_list')
     template_name = GENERIC_DELETE_TEMPLATE_PATH
-
-    def get_context_data(self, **kwargs):
-        context = super(InstructorDelete, self).get_context_data(**kwargs)
-        context['page_title'] = 'Delete Instructor'
-        return context
+    failed_delete_template = GENERIC_FAILED_DELETE_TEMPLATE_PATH
 
 
 class SectionList(ListView):
@@ -149,15 +146,11 @@ class CourseUpdate(LoginRequiredMixin, CourseActionMixin, UpdateView):
         return context
 
 
-class CourseDelete(LoginRequiredMixin, DeleteView):
+class CourseDelete(LoginRequiredMixin, ValidateUnconnectedSectionsDeleteMixin, DeleteView):
     model = Course
     success_url = reverse_lazy('courseinfo:course_list')
     template_name = GENERIC_DELETE_TEMPLATE_PATH
-
-    def get_context_data(self, **kwargs):
-        context = super(CourseDelete, self).get_context_data(**kwargs)
-        context['page_title'] = 'Delete Course'
-        return context
+    failed_delete_template = GENERIC_FAILED_DELETE_TEMPLATE_PATH
 
 
 class SemesterList(ListView):
@@ -197,15 +190,11 @@ class SemesterUpdate(LoginRequiredMixin, CourseActionMixin, UpdateView):
         return context
 
 
-class SemesterDelete(LoginRequiredMixin, DeleteView):
+class SemesterDelete(LoginRequiredMixin, ValidateUnconnectedSectionsDeleteMixin, DeleteView):
     model = Semester
     success_url = reverse_lazy('courseinfo:semester_list')
     template_name = GENERIC_DELETE_TEMPLATE_PATH
-
-    def get_context_data(self, **kwargs):
-        context = super(SemesterDelete, self).get_context_data(**kwargs)
-        context['page_title'] = 'Delete Semester'
-        return context
+    failed_delete_template = GENERIC_FAILED_DELETE_TEMPLATE_PATH
 
 
 class StudentList(ListView):
@@ -245,12 +234,8 @@ class StudentUpdate(LoginRequiredMixin, CourseActionMixin, UpdateView):
         return context
 
 
-class StudentDelete(LoginRequiredMixin, DeleteView):
+class StudentDelete(LoginRequiredMixin, ValidateUnconnectedSectionsDeleteMixin, DeleteView):
     model = Student
     success_url = reverse_lazy('courseinfo:student_list')
     template_name = GENERIC_DELETE_TEMPLATE_PATH
-
-    def get_context_data(self, **kwargs):
-        context = super(StudentDelete, self).get_context_data(**kwargs)
-        context['page_title'] = 'Delete Student'
-        return context
+    failed_delete_template = GENERIC_FAILED_DELETE_TEMPLATE_PATH

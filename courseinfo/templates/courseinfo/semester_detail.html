@@ -8,10 +8,10 @@
   <h2> {{  semester }} </h2>
 
   <div>
-    <a class="btn btn-secondary" href="{% url 'courseinfo:semester_update' semester.slug %}">
+    <a class="btn btn-secondary" href="{{ semester.get_delete_url }}">
       Update Semester
     </a>
-    <a class="btn btn-danger" href="{% url 'courseinfo:semester_remove' semester.slug %}">
+    <a class="btn btn-danger" href="{{ semester.get_delete_url }}">
       Remove Semester
     </a>
   </div>

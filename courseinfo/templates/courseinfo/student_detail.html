@@ -8,10 +8,10 @@
   <h2> {{ student.last_name }}, {{ student.first_name }} </h2>
 
     <div>
-    <a class="btn btn-secondary" href="{% url 'courseinfo:student_update' student.slug %}">
+    <a class="btn btn-secondary" href="{{ student.get_update_url }}">
       Update Student
     </a>
-    <a class="btn btn-danger" href="{% url 'courseinfo:student_remove' student.slug %}">
+    <a class="btn btn-danger" href="{{ student.get_delete_url }}">
       Remove Student
     </a>
   </div>

@@ -1,0 +1,25 @@
+{% extends 'courseinfo/courseinfo_base.html' %}
+
+{% block title %}
+  {{ page_title|title }}
+{% endblock %}
+
+{% block extended_content %}
+  <div>
+    <h2>{{ page_title|title }}</h2>
+    <p>
+      You may not delete {{ model_name|title }} {{ object }}. This
+      {{ model_name|title }} is currently assigned to the following
+      sections:
+    </p>
+    <ul>
+      {% for section in sections %}
+        <li><a href="{{ section.get_absolute_url }}">{{ section }}</a></li>
+      {% endfor %}
+    </ul>
+    <a href="{% url list_url  %}"
+       class="btn btn-success">
+      Back to {{ model_name|title }} List
+    </a>
+  </div>
+{% endblock %}

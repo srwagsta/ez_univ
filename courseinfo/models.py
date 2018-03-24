@@ -15,6 +15,12 @@ class Semester(models.Model):
     def get_absolute_url(self):
         return reverse('courseinfo:semester_detail', kwargs={'slug': self.slug})
 
+    def get_update_url(self):
+        return reverse('courseinfo:semester_update', kwargs={'slug': self.slug})
+
+    def get_delete_url(self):
+        return reverse('courseinfo:semester_remove', kwargs={'slug': self.slug})
+
     def _get_unique_slug(self):
         unique_slug = slugify(self.semester_name)
         for x in itertools.count(1):
@@ -44,6 +50,12 @@ class Course(models.Model):
     def get_absolute_url(self):
         return reverse('courseinfo:course_detail', kwargs={'slug': self.slug})
 
+    def get_update_url(self):
+        return reverse('courseinfo:course_update', kwargs={'slug': self.slug})
+
+    def get_delete_url(self):
+        return reverse('courseinfo:course_remove', kwargs={'slug': self.slug})
+
     def _get_unique_slug(self):
         unique_slug = slugify(self.course_name)
         for x in itertools.count(1):
@@ -72,6 +84,12 @@ class Instructor(models.Model):
 
     def get_absolute_url(self):
         return reverse('courseinfo:instructor_detail', kwargs={'slug': self.slug})
+
+    def get_update_url(self):
+        return reverse('courseinfo:instructor_update', kwargs={'slug': self.slug})
+
+    def get_delete_url(self):
+        return reverse('courseinfo:instructor_remove', kwargs={'slug': self.slug})
 
     def _get_unique_slug(self):
         unique_slug = slugify('%s--%s' % (self.last_name, self.first_name))
@@ -106,6 +124,12 @@ class Student(models.Model):
     def get_absolute_url(self):
         return reverse('courseinfo:student_detail', kwargs={'slug': self.slug})
 
+    def get_update_url(self):
+        return reverse('courseinfo:student_update', kwargs={'slug': self.slug})
+
+    def get_delete_url(self):
+        return reverse('courseinfo:student_remove', kwargs={'slug': self.slug})
+
     def _get_unique_slug(self):
         unique_slug = slugify('%s--%s' % (self.last_name, self.first_name))
         for x in itertools.count(1):
@@ -137,6 +161,12 @@ class Section(models.Model):
 
     def get_absolute_url(self):
         return reverse('courseinfo:section_detail', kwargs={'slug': self.slug})
+
+    def get_update_url(self):
+        return reverse('courseinfo:section_update', kwargs={'slug': self.slug})
+
+    def get_delete_url(self):
+        return reverse('courseinfo:section_remove', kwargs={'slug': self.slug})
 
     def _get_unique_slug(self):
         unique_slug = slugify(self.section_name)
