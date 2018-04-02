@@ -53,7 +53,7 @@ class CourseForm(ModelForm):
 class SemesterForm(ModelForm):
     class Meta:
         model = Semester
-        fields = ['semester_name']
+        fields = ['calendar_period', 'year']
 
     def __init__(self, *args, **kwargs):
         super(SemesterForm, self).__init__(*args, **kwargs)

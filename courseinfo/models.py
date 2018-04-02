@@ -4,13 +4,25 @@ from django.utils.text import slugify
 import itertools
 
 
+class CalendarPeriod(models.Model):
+    calendar_period_id = models.IntegerField(primary_key=True)
+    calendar_period_name = models.CharField(max_length=45, unique=True)
+
+    def __str__(self):
+        return '%s' % self.calendar_period_name
+
+    class Meta:
+        ordering = ['calendar_period_id']
+
+
 class Semester(models.Model):
     semester_id = models.AutoField(primary_key=True)
-    semester_name = models.CharField(max_length=45, unique=True)
+    year = models.IntegerField()
+    calendar_period = models.ForeignKey(CalendarPeriod, related_name='semesters', on_delete=models.CASCADE)
     slug = models.SlugField(unique=True, editable=False)
 
     def __str__(self):
-        return '%s' % self.semester_name
+        return '%s-%s' % (self.year, self.calendar_period.calendar_period_name)
 
     def get_absolute_url(self):
         return reverse('courseinfo:semester_detail', kwargs={'slug': self.slug})
@@ -22,7 +34,7 @@ class Semester(models.Model):
         return reverse('courseinfo:semester_remove', kwargs={'slug': self.slug})
 
     def _get_unique_slug(self):
-        unique_slug = slugify(self.semester_name)
+        unique_slug = slugify(self)
         for x in itertools.count(1):
             if not Semester.objects.filter(slug=unique_slug).exists():
                 break
@@ -35,7 +47,8 @@ class Semester(models.Model):
         super().save()
 
     class Meta:
-        ordering = ['semester_name']
+        ordering = ['year', 'calendar_period__calendar_period_id']
+        unique_together = ('year', 'calendar_period')
 
 
 class Course(models.Model):
@@ -157,7 +170,7 @@ class Section(models.Model):
     slug = models.SlugField(unique=True, editable=False)
 
     def __str__(self):
-        return '%s - %s (%s)' % (self.course.course_number, self.section_name, self.semester.semester_name)
+        return '%s - %s (%s)' % (self.course.course_number, self.section_name, self.semester)
 
     def get_absolute_url(self):
         return reverse('courseinfo:section_detail', kwargs={'slug': self.slug})
@@ -182,4 +195,4 @@ class Section(models.Model):
         super().save()
 
     class Meta:
-        ordering = ['course__course_number', 'section_name', 'semester__semester_name']
+        ordering = ['course__course_number', 'section_name', 'semester']
