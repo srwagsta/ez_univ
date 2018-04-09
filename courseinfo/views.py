@@ -18,6 +18,8 @@ class Courseinfo(TemplateView):
 class InstructorList(ListView):
     model = Instructor
     context_object_name = 'instructor_list'
+    paginate_by = 5
+    queryset = Instructor.objects.all()
 
 
 class InstructorDetailView(DetailView):
@@ -199,6 +201,8 @@ class SemesterDelete(ValidateUnconnectedSectionsDeleteMixin, DeleteView):
 class StudentList(ListView):
     model = Student
     context_object_name = 'student_list'
+    paginate_by = 5
+    queryset = Student.objects.all()
 
 
 class StudentDetailView(DetailView):
