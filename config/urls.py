@@ -31,6 +31,7 @@ if settings.DEBUG:
         path('403/', default_views.permission_denied, kwargs={'exception': Exception('Permission Denied')}),
         path('404/', default_views.page_not_found, kwargs={'exception': Exception('Page not Found')}),
         path('500/', default_views.server_error),
+        path('about/', TemplateView.as_view(template_name='pages/about.html'), name='about'),
     ]
     if 'debug_toolbar' in settings.INSTALLED_APPS:
         import debug_toolbar

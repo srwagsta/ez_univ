@@ -16,78 +16,139 @@
 
     {% block css %}
 
-    <!-- Latest compiled and minified Bootstrap 4 beta CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+      <!-- Your stuff: Third-party CSS libraries go here -->
+      {% compress css %}
+      <!-- This file stores project-specific CSS -->
 
+      <link href="{% static 'css/project.css' %}" rel="stylesheet">
+      <link rel="stylesheet" type="text/css"
+            href="{% static 'coursinfo/normalize.css' %}">
+      <link rel="stylesheet" type="text/css"
+            href="{% static 'courseinfo/skeleton.css' %}">
+      <link rel="stylesheet" type="text/css"
+            href="{% static 'courseinfo/style.css' %}">
 
-    <!-- Your stuff: Third-party CSS libraries go here -->
-    {% compress css %}
-    <!-- This file stores project-specific CSS -->
+      {% endcompress %}
 
-    <link href="{% static 'css/project.css' %}" rel="stylesheet">
-
-    {% endcompress %}
     {% endblock %}
 
   </head>
 
   <body>
-
-    <div class="m-b-1">
-      <nav class="navbar navbar-expand-md navbar-light bg-light">
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <a class="navbar-brand" href="{% url 'home' %}">EZ_university</a>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
-            </li>
-            {% block extended_nav_links  %}
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'courseinfo:courseinfo_home' %}">Courses & Information</a>
-              </li>
-            {% endblock %}
-            {% if request.user.is_authenticated %}
-              <li class="nav-item">
-                {# URL provided by django-allauth/account/urls.py #}
-                <a class="nav-link" href="{% url 'users:detail' request.user.username  %}">{% trans "My Profile" %}</a>
-              </li>
-              <li class="nav-item">
-                {# URL provided by django-allauth/account/urls.py #}
-                <a class="nav-link" href="{% url 'account_logout' %}">{% trans "Sign Out" %}</a>
-              </li>
-            {% else %}
-              <li class="nav-item">
-                {# URL provided by django-allauth/account/urls.py #}
-                <a id="sign-up-link" class="nav-link" href="{% url 'account_signup' %}">{% trans "Sign Up" %}</a>
-              </li>
-              <li class="nav-item">
-                {# URL provided by django-allauth/account/urls.py #}
-                <a id="log-in-link" class="nav-link" href="{% url 'account_login' %}">{% trans "Sign In" %}</a>
-              </li>
-            {% endif %}
-          </ul>
-        </div>
-      </nav>
-
-    </div>
-
     <div class="container">
-      {#This block allows messaging functionality across all pages#}
-      {% if messages %}
-          {% for message in messages %}
-              <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">{{ message }}</div>
-          {% endfor %}
-      {% endif %}
+    <header class="row">
+        <div class="offset-by-one ten columns">
+            <h1 class="logo">EZ University</h1>
+            <h2>Course Information System</h2>
+        </div>
+    </header>
+    <nav>
+      <ul>
+        {% if request.user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'courseinfo:instructor_list' %}">Instructors</a>
+          </li>
 
-      {% block content %}
-        <p>Use this document as a way to quick start any new project.</p>
-      {% endblock content %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'courseinfo:section_list' %}">Sections</a>
+          </li>
 
-    </div> <!-- /container -->
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'courseinfo:course_list' %}">Courses</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'courseinfo:semester_list' %}">Semesters</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'courseinfo:student_list' %}">Students</a>
+          </li>
+
+          <li class="nav-item">
+            {# URL provided by django-allauth/account/urls.py #}
+            <a class="nav-link" href="{% url 'users:detail' request.user.username  %}">{% trans "My Profile" %}</a>
+          </li>
+
+          <li class="nav-item">
+            {# URL provided by django-allauth/account/urls.py #}
+            <a class="nav-link" href="{% url 'account_logout' %}">{% trans "Sign Out" %}</a>
+          </li>
+
+        {% else %}
+          <li class="nav-item">
+            {# URL provided by django-allauth/account/urls.py #}
+            <a id="sign-up-link" class="nav-link" href="{% url 'account_signup' %}">{% trans "Sign Up" %}</a>
+          </li>
+          <li class="nav-item">
+            {# URL provided by django-allauth/account/urls.py #}
+            <a id="log-in-link" class="nav-link" href="{% url 'account_login' %}">{% trans "Sign In" %}</a>
+          </li>
+        {% endif %}
+        <li class="nav-item">
+          {# This link any user should be able to see, even if they are not logged in#}
+          <a id="log-in-link" class="nav-link" href="{% url 'about' %}">{% trans "About" %}</a>
+        </li>
+      </ul>
+    </nav>
+    {% if messages %}
+        <div class="row">
+            <div class="twelve columns">
+                <ul class="messages">
+                    {% for message in messages %}
+                        {% if message.tags %}
+                            <li class="{{ message.tags }}">
+                                {% else %}
+                            <li>
+                        {% endif %}
+                    {{ message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    {% endif %}
+    <main>
+    {% block content %}
+      <div class="row">
+        <section class="eight columns">
+          {% block org_content %}
+            This is default content!
+          {% endblock %}
+        </section>
+        <section class="desktop four columns">
+          {% block create_button %}{% endblock %}
+        </section>
+      </div>
+      <div class="row">
+        <div class="twelve columns">
+          {% block content_footer %}{% endblock %}
+        </div>
+      </div>
+    {% endblock %}
+    </main>
+  </div><!-- container -->
+
+  <footer>
+    <p>
+        <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
+            <img alt="Creative Commons License" style="border-width:0"
+                 src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png"/>
+        </a><br/><span property="dct:title">EZ University Tutorial Examples and Code</span>
+        by
+        <a href="https://www.ligent.net" property="cc:attributionName"
+           rel="cc:attributionURL">Ligent, LLC</a> are licensed under a
+        <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike
+            4.0 International License</a>.
+    </p>
+    <p>Portions of the EZ University code are based upon code from
+        <a href="https://django-unleashed.com">Django Unleashed</a>,
+        <a href="http://getskeleton.com/">Skeleton</a>, and
+        <a href="https://necolas.github.io/normalize.css/">Normalize.css</a> and
+        are subject to the intellectual property rights restrictions of those works.
+    </p>
+  </footer>
+
+
 
     {% block modal %}{% endblock modal %}
 
